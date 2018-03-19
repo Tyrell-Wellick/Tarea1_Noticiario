@@ -1,0 +1,33 @@
+<head> <br><center> <h1>Administrar Noticias</h1> </center></head>
+<body>
+  <container>
+    <div>
+      <u1>
+        <% if @entries.nil? %>
+          <h3> Sin noticias... </h3>
+        <% else %>
+            <table>
+              <tr>
+                <th>Noticia</th>
+                <th>Fecha Publicación</th>
+                <th>Acciones</th>
+              </tr>
+              <% @entries.each do |entry| %>
+                <tr>
+                  <td><%= entry.headline %></td>
+                  <td><%= entry.created_at %></td>
+                  <td><%= link_to "editar", edit_admin_entry_path(:admin_id => current_admin.id,
+                   :id => entry.id) %> | <%= link_to 'eliminar',
+                   admin_entry_path(:admin_id => current_admin.id,
+                   :id => entry.id), method: :delete,
+                    data: { confirm: '¿Estás seguro que quieres eliminar la noticia?' }%> </td>
+                </tr>
+              <% end %>
+            </table>
+        <% end %>
+      <br><br><br>
+      </u1>
+      <center><button type="button"><%= link_to "Publicar Noticia", new_entry_path, class: "nounderline", style: 'color:#000000;' %> </button></center>
+    </div>
+  </container>
+</body>

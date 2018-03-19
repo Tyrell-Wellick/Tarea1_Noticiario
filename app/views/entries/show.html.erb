@@ -1,0 +1,46 @@
+<center><h1>Noticia</h1></center>
+<br><br>
+<center><h2><%= @entry.headline %></h2></center>
+<br><br>
+<center><h3><%= @entry.dropline %></h3></center>
+<br>
+<h4><%= @entry.created_at %><h4>
+<ul>
+  <div>
+      <p> <%= @entry.body %> </p>
+  </div>
+</ul>
+<br><br><br>
+<h1> Comentarios </h1>
+<% if @comments.length == 0 %>
+  <h3> Sin comentarios... </h3>
+<% else %>
+  <div>
+    <% @comments.each do |comment|%>
+      <h3><%= comment.name %> </h3><h5><%= comment.created_at.strftime('Fecha %d/%m/%Y Hora %H:%M hrs') %></h5>
+      <center><h4><%= comment.content %></h4></center>
+      <br><br>
+    <% end %>
+  </div>
+<% end %>
+<br><br><br>
+<h1>Agregar Comentario</h1>
+<div>
+  <div class="container">
+    <div class="jumbotron">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <%= form_for(@comment, url: new_entry_comment_post_path(@entry.id)) do |f| %>
+            <%= f.label :Nombre %><br/>
+            <%= f.text_area :name, :cols => "50", :rows => "1", :maxlength =>"50", :required => 'required', :value => 'Ingresa acá tu nombre' %><br/><br/><br/>
+            <%= f.label :Comentario %><br/>
+            <%= f.text_area :content, :cols => "100", :rows => 5, :maxlength =>"500", :required => 'required', :value => 'Ingresa acá tu comentario' %>
+            <%= @entry.id %>
+            <%= hidden_field_tag 'entry_id', @entry.id %> <br/><br/><br/>
+            <%= f.submit "Publicar Comentario", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

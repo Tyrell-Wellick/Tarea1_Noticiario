@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+<% if admin_signed_in? %>
+  <%= render :file => 'app/views/entries/_admin.html.erb' %>
+<% else %>
+  <%= render :file => 'app/views/entries/_no_admin.html.erb' %>
+<% end %>
+<%= @sitio %>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Noticiario</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <% if admin_signed_in? %>
+      <div class="right"><%= link_to('Logout', destroy_admin_session_path, method: :delete, style: 'color:#000000;')%></div>
+    <% else %>
+      <div class="right"><%= link_to "Administrar", new_admin_session_path , style: 'color:#000000;'%></div>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>

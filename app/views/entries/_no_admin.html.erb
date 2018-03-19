@@ -1,0 +1,27 @@
+<head> <br><center> <h1>Noticias</h1> </center></head>
+<body>
+  <container>
+    <div>
+      <u1>
+        <% if @entries.nil? %>
+          <h3> Sin noticias... </h3>
+        <% elsif @entries.length >= 10 %>
+          <% @entries = @entries.first(10) %>
+        <% end %>
+        <% @entries.each do |entry| %>
+            <center><h2> <%= entry.headline %> </h2>
+            <h3> <%= entry.dropline %> </h3></center>
+            <h5> <%= entry.created_at %> </h5>
+            <br>
+            <% if entry.body.length > 500 %>
+              <h4> <%= entry.body[0..499]+'...' %> </h4>
+            <% else %>
+              <h4> <%= entry.body %> </h4>
+            <% end %>
+            <%= link_to "ver", show_entry_path(:id => entry.id) %> | Comentarios: <%= entry.comments.length %>
+            <p><%= "-"*250 %></p>
+        <% end %>
+      </u1>
+    </div>
+  </container>
+</body>
